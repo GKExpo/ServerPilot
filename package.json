@@ -1,0 +1,40 @@
+{
+  "name": "serverpilot",
+  "version": "1.0.0",
+  "description": "A Windows desktop control panel for local Minecraft servers with Playit.gg integration.",
+  "author": "ServerPilot",
+  "license": "MIT",
+  "main": "electron/main.js",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && cross-env VITE_DEV_SERVER_URL=http://127.0.0.1:5173 electron .\"",
+    "build": "vite build",
+    "dist": "npm run build && electron-builder --win nsis portable",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "archiver": "^7.0.1",
+    "clsx": "^2.1.1",
+    "electron-store": "^8.2.0",
+    "extract-zip": "^2.0.1",
+    "lucide-react": "^0.468.0",
+    "monaco-editor": "^0.53.0",
+    "pidusage": "^3.0.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.13.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.0",
+    "cross-env": "^7.0.3",
+    "electron": "^42.0.0",
+    "electron-builder": "^26.8.1",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "vite": "^6.0.3",
+    "wait-on": "^8.0.1"
+  }
+}

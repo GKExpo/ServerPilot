@@ -1,0 +1,45 @@
+{
+  "appId": "com.serverpilot.desktop",
+  "productName": "ServerPilot",
+  "asar": true,
+  "directories": {
+    "output": "dist"
+  },
+  "files": [
+    "electron/**/*",
+    "backend/**/*",
+    "assets/**/*",
+    "storage/**/*",
+    "dist-renderer/**/*",
+    "package.json"
+  ],
+  "extraMetadata": {
+    "main": "electron/main.js"
+  },
+  "win": {
+    "icon": "assets/icon.ico",
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64"]
+      },
+      {
+        "target": "portable",
+        "arch": ["x64"]
+      }
+    ],
+    "artifactName": "ServerPilot-${version}-${arch}-${name}.${ext}"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "ServerPilot",
+    "artifactName": "ServerPilot-Setup-${version}.${ext}"
+  },
+  "portable": {
+    "artifactName": "ServerPilot-Portable-${version}.${ext}"
+  }
+}

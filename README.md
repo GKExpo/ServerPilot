@@ -82,6 +82,13 @@ D:\MineCraft\Server
 
 Minecraft servers create important files on first run.
 
+To run the server , open command prompt for the folder in which you put the `paper.jar`. And run the following command there.
+
+```text
+java -Xmx2G -Xms2G -jar paper.jar nogui
+```
+This will be only first time setup to create server files in the folder like following `eula.txt` and other.
+
 You can start the server from ServerPilot. If it stops because of the EULA, open this file:
 
 ```text

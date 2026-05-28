@@ -1,6 +1,6 @@
 <div align="center">
   <img src="assets/icon.ico" width="100" height="100" alt="ServerPilot Logo" />
-  <h1>ServerPilot V2</h1>
+  <h1>ServerPilot</h1>
   <p><strong>The ultimate desktop control deck for managing local Minecraft servers.</strong></p>
 </div>
 
@@ -27,12 +27,12 @@ ServerPilot is a beautifully designed, modern Windows desktop application that m
 ### Installation
 The easiest way to get ServerPilot is to download the compiled `.exe` from the [Releases](https://github.com/GKExpo/ServerPilot/releases) page.
 
-1. Download `ServerPilotV2-Setup-X.X.X.exe`.
+1. Download `ServerPilot-Setup-X.X.X.exe`.
 2. Run the installer (No Administrator privileges required).
 3. The app will launch the **Onboarding Wizard** automatically to guide you through your first setup.
 
 ### Portable Version
-If you prefer not to install the app, download `ServerPilotV2-Portable-X.X.X.exe` and place it anywhere on your system.
+If you prefer not to install the app, download `ServerPilot-Portable-X.X.X.exe` and place it anywhere on your system.
 
 ---
 

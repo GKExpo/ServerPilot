@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/icon.png" width="100" height="100" alt="ServerPilot Logo" />
+  <img src="assets/icon.ico" width="100" height="100" alt="ServerPilot Logo" />
   <h1>ServerPilot V2</h1>
   <p><strong>The ultimate desktop control deck for managing local Minecraft servers.</strong></p>
 </div>

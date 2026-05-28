@@ -1,4 +1,92 @@
-# ServerPilot
+<div align="center">
+  <img src="assets/icon.png" width="100" height="100" alt="ServerPilot Logo" />
+  <h1>ServerPilot V2</h1>
+  <p><strong>The ultimate desktop control deck for managing local Minecraft servers.</strong></p>
+</div>
+
+<br/>
+
+ServerPilot is a beautifully designed, modern Windows desktop application that makes hosting, managing, and playing on local Minecraft servers completely effortless. Forget messy batch files and complicated router configurations. ServerPilot handles everything from server lifecycle to automatic port forwarding via Playit.gg.
+
+---
+
+## ✨ Features
+
+- **🎮 One-Click Start/Stop:** Launch your server and your Playit.gg tunnel simultaneously with a single button.
+- **📡 Automatic Multiplayer:** Built-in Playit.gg integration allows friends to join without touching router port forwarding.
+- **📊 Live Dashboard:** Monitor Server TPS, CPU utilization, and RAM allocation in real-time.
+- **👥 Player Tracking:** See exactly who is online, when they joined, and track their chat/advancement activity.
+- **💻 Integrated Console:** A sleek, dark-themed terminal that directly pipes server logs and accepts live commands.
+- **📁 File & Properties Manager:** Tweak your `server.properties`, whitelist, and banned players lists without leaving the app.
+- **📦 Instant Backups:** Zip up your entire server world with a single click.
+
+---
+
+## 🚀 Getting Started
+
+### Installation
+The easiest way to get ServerPilot is to download the compiled `.exe` from the [Releases](https://github.com/GKExpo/ServerPilot/releases) page.
+
+1. Download `ServerPilotV2-Setup-X.X.X.exe`.
+2. Run the installer (No Administrator privileges required).
+3. The app will launch the **Onboarding Wizard** automatically to guide you through your first setup.
+
+### Portable Version
+If you prefer not to install the app, download `ServerPilotV2-Portable-X.X.X.exe` and place it anywhere on your system.
+
+---
+
+## 🛡 Security First
+
+ServerPilot V2 was rebuilt from the ground up with a focus on system security and isolation.
+- **Full Electron Sandboxing:** The renderer process is strictly sandboxed with no access to Node.js environments.
+- **Restricted Filesystem Access:** Built-in safeguards aggressively block the File Manager from modifying Windows system paths or navigating outside your designated server folders.
+- **No Admin Required:** The app intentionally runs as `asInvoker`, ensuring maximum safety for your host PC.
+
+---
+
+## 🛠 Tech Stack
+
+- **Framework:** Electron & React 18
+- **Styling:** Tailwind CSS & Glassmorphism Aesthetics
+- **Build Tool:** Vite
+- **Storage:** Electron-Store (Local JSON persistence)
+- **Monitoring:** Recharts & Pidusage
+
+---
+
+## 🏗 Build from Source
+
+If you want to contribute or build the application yourself, ensure you have **Node.js 18+** installed.
+
+```bash
+# Clone the repository
+git clone https://github.com/GKExpo/ServerPilot.git
+cd ServerPilot
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+
+# Compile the final Windows Executables (Output is placed in /dist)
+npm run dist
+```
+
+---
+
+## 🗺 Roadmap
+
+- [ ] Multi-Server parallel execution support
+- [ ] Auto-downloader for Paper, Fabric, and Forge JARs
+- [ ] Modpack installation manager
+- [ ] Mac & Linux support
+
+---
+
+## 📜 Credits
+Built by GKExpo. Minecraft is a trademark of Mojang AB. ServerPilot is an unofficial tool and is not affiliated with or endorsed by Mojang or Microsoft.
 
 ServerPilot is a Windows desktop control panel for running local Minecraft servers without opening Command Prompt manually. It manages Paper, Fabric, Forge, and Vanilla server folders with one-click start/stop controls, live console logs, Playit.gg support, backups, file editing, server.properties editing, monitoring, and player activity tracking.
 

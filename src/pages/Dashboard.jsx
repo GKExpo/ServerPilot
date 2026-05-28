@@ -1,16 +1,33 @@
-import { AlertTriangle, Cpu, FolderOpen, HardDrive, Play, Power, RefreshCw, TerminalSquare, Timer, Users, Zap } from 'lucide-react';
+import { AlertTriangle, Cpu, FolderOpen, HardDrive, Play, Plus, Power, RefreshCw, Server, TerminalSquare, Timer, Users, Zap } from 'lucide-react';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { MetricCard } from '../components/MetricCard';
 import { StatusPill } from '../components/StatusPill';
 import { api } from '../services/api';
 import { formatUptime } from '../utils/format';
 
-export function Dashboard({ server, status, metrics, playersState, refresh }) {
+export function Dashboard({ server, status, metrics, playersState, refresh, onAdd }) {
   const currentStatus = status?.status || metrics.status || 'OFFLINE';
   const active = ['STARTING', 'ONLINE'].includes(currentStatus);
   const stopping = currentStatus === 'STOPPING';
   const canStart = server && !['STARTING', 'ONLINE', 'STOPPING'].includes(currentStatus);
   const canStop = server && ['STARTING', 'ONLINE'].includes(currentStatus);
+
+  if (!server) {
+    return (
+      <div className="flex h-full items-center justify-center p-5">
+        <div className="w-full max-w-md animate-page-enter rounded-2xl border border-neon/20 bg-panel2/60 p-8 text-center shadow-[0_0_40px_rgba(52,241,123,0.1)] backdrop-blur-xl">
+          <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-neon/10">
+            <Server className="h-8 w-8 text-neon" />
+          </div>
+          <h2 className="text-2xl font-bold text-white">No Servers Found</h2>
+          <p className="mt-2 text-zinc-400">Create your first local Minecraft server to start playing and managing everything from one place.</p>
+          <button className="btn primary mt-8 w-full" onClick={onAdd}>
+            <Plus className="h-5 w-5" /> Add Server
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   async function action(channel) {
     if (!server) return;
@@ -20,7 +37,7 @@ export function Dashboard({ server, status, metrics, playersState, refresh }) {
 
   return (
     <div className="space-y-5 p-5">
-      <div className="rounded-xl border border-line bg-panel p-5">
+      <div className="rounded-xl border border-line bg-panel/80 p-5 transition-all hover:shadow-[0_0_20px_rgba(52,241,123,0.08)]">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <div className="mb-3 flex flex-wrap items-center gap-3">
@@ -66,7 +83,7 @@ export function Dashboard({ server, status, metrics, playersState, refresh }) {
         <MetricCard icon={Users} label="Players" value={playersState?.onlineCount ?? metrics.players ?? 0} accent="text-neon2" />
       </div>
       <div className="grid gap-5 xl:grid-cols-2">
-        <div className="h-80 rounded-xl border border-line bg-panel p-5">
+        <div className="h-80 rounded-xl border border-line bg-panel/80 p-5 transition-all hover:shadow-[0_0_20px_rgba(52,241,123,0.05)]">
           <h4 className="mb-4 font-semibold">CPU Usage</h4>
           <ResponsiveContainer width="100%" height="85%">
             <AreaChart data={metrics.history || []}>
@@ -76,7 +93,7 @@ export function Dashboard({ server, status, metrics, playersState, refresh }) {
             </AreaChart>
           </ResponsiveContainer>
         </div>
-        <div className="h-80 rounded-xl border border-line bg-panel p-5">
+        <div className="h-80 rounded-xl border border-line bg-panel/80 p-5 transition-all hover:shadow-[0_0_20px_rgba(52,241,123,0.05)]">
           <h4 className="mb-4 font-semibold">Memory Usage</h4>
           <ResponsiveContainer width="100%" height="85%">
             <AreaChart data={metrics.history || []}>

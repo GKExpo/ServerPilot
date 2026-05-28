@@ -4,14 +4,14 @@ import { StatusPill } from './StatusPill';
 
 export function Sidebar({ servers, selectedId, statuses, onSelect, onAdd, onEdit, onRemove }) {
   return (
-    <aside className="flex h-full w-80 flex-col border-r border-line bg-[#090d14]">
+    <aside className="flex h-full w-80 flex-col border-r border-white/5 bg-void/70 backdrop-blur-2xl">
       <div className="border-b border-line p-5">
         <div className="flex items-center gap-3">
           <div className="grid h-10 w-10 place-items-center rounded-lg border border-neon/30 bg-neon/10 shadow-glow">
             <Server className="h-5 w-5 text-neon" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-white">ServerPilot</h1>
+            <h1 className="text-xl font-bold text-white">ServerPilot V2</h1>
             <p className="text-xs text-zinc-500">Minecraft control deck</p>
           </div>
         </div>
@@ -22,7 +22,7 @@ export function Sidebar({ servers, selectedId, statuses, onSelect, onAdd, onEdit
         </button>
         <div className="space-y-2">
           {servers.map((server) => (
-            <button key={server.id} onClick={() => onSelect(server.id)} className={clsx('group w-full rounded-lg border p-3 text-left transition', selectedId === server.id ? 'border-neon/40 bg-neon/10 shadow-glow' : 'border-line bg-panel hover:border-zinc-600')}>
+            <button key={server.id} onClick={() => onSelect(server.id)} className={clsx('group w-full rounded-lg border p-3 text-left transition-all duration-300', selectedId === server.id ? 'border-neon/40 bg-neon/10 shadow-[0_0_15px_rgba(52,241,123,0.15)]' : 'border-line bg-panel/50 hover:border-zinc-500 hover:-translate-y-[1px] hover:shadow-lg')}>
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <div className="truncate font-semibold text-zinc-100">{server.name}</div>

@@ -18,7 +18,7 @@ export function Shell({ servers, selectedId, statuses, tab, onTab, onSelect, onA
     <div className="flex h-screen overflow-hidden bg-void text-zinc-100">
       <Sidebar servers={servers} selectedId={selectedId} statuses={statuses} onSelect={onSelect} onAdd={onAdd} onEdit={onEdit} onRemove={onRemove} />
       <main className="flex min-w-0 flex-1 flex-col">
-        <header className="flex items-center justify-between border-b border-line bg-panel/90 px-5 py-3 backdrop-blur">
+        <header className="flex items-center justify-between border-b border-line bg-panel2/60 px-5 py-3 backdrop-blur-xl">
           <div className="min-w-0">
             <div className="flex items-center gap-3">
               <Activity className="h-5 w-5 text-neon" />
@@ -30,14 +30,14 @@ export function Shell({ servers, selectedId, statuses, tab, onTab, onSelect, onA
             {tabs.map((item) => {
               const Icon = item.icon;
               return (
-                <button key={item.id} onClick={() => onTab(item.id)} className={clsx('flex items-center gap-2 rounded-md px-3 py-2 text-sm transition', tab === item.id ? 'bg-neon text-black' : 'text-zinc-400 hover:bg-white/5 hover:text-white')}>
+                <button key={item.id} onClick={() => onTab(item.id)} className={clsx('flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-all duration-300 ease-in-out', tab === item.id ? 'bg-gradient-to-r from-neon to-emerald-400 text-black shadow-[0_0_15px_rgba(52,241,123,0.3)]' : 'text-zinc-400 hover:bg-white/5 hover:text-white')}>
                   <Icon className="h-4 w-4" /> {item.label}
                 </button>
               );
             })}
           </nav>
         </header>
-        <section className="min-h-0 flex-1 overflow-auto">{children}</section>
+        <section key={tab} className="min-h-0 flex-1 overflow-auto animate-page-enter">{children}</section>
       </main>
     </div>
   );

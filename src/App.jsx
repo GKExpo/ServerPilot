@@ -9,6 +9,7 @@ import { Properties } from './pages/Properties';
 import { Backups } from './pages/Backups';
 import { Settings } from './pages/Settings';
 import { Players } from './pages/Players';
+import { Onboarding } from './components/Onboarding';
 import { api } from './services/api';
 import { useInterval } from './hooks/useInterval';
 
@@ -22,6 +23,7 @@ function AppInner() {
   const [logs, setLogs] = useState({});
   const [players, setPlayers] = useState({});
   const [modal, setModal] = useState({ open: false, server: null });
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const logBuffer = useRef({});
   const flushTimer = useRef(null);
   const toast = useToast();
@@ -33,6 +35,10 @@ function AppInner() {
     setServers(data.servers);
     setSettings(data.settings);
     setSelectedId((current) => current || data.servers[0]?.id || null);
+    
+    if (data.servers.length === 0 && data.settings.hasCompletedOnboarding === false) {
+      setShowOnboarding(true);
+    }
   }, []);
 
   useEffect(() => { load(); }, [load]);
@@ -88,6 +94,15 @@ function AppInner() {
     toast.push({ title: 'Server saved', body: `${server.name} is ready.` });
   }
 
+  async function completeOnboarding(serverData = null) {
+    if (serverData) {
+      await api.invoke('server:add', serverData);
+    }
+    await api.invoke('settings:update', { hasCompletedOnboarding: true });
+    setShowOnboarding(false);
+    await load();
+  }
+
   const page = (() => {
     if (tab === 'console') return <ConsoleView server={selected} logs={logs[selectedId] || []} />;
     if (tab === 'players') return <Players server={selected} playersState={players[selectedId] || { online: [], activity: [], onlineCount: 0 }} />;
@@ -95,8 +110,12 @@ function AppInner() {
     if (tab === 'properties') return <Properties server={selected} />;
     if (tab === 'backups') return <Backups server={selected} />;
     if (tab === 'settings') return <Settings settings={settings} onSaved={setSettings} />;
-    return <Dashboard server={selected} status={statuses[selectedId]} metrics={metrics[selectedId] || { history: [] }} playersState={players[selectedId] || { onlineCount: 0 }} refresh={load} />;
+    return <Dashboard server={selected} status={statuses[selectedId]} metrics={metrics[selectedId] || { history: [] }} playersState={players[selectedId] || { onlineCount: 0 }} refresh={load} onAdd={() => setModal({ open: true, server: null })} />;
   })();
+
+  if (showOnboarding) {
+    return <Onboarding onComplete={completeOnboarding} onSkip={() => completeOnboarding(null)} settings={settings} />;
+  }
 
   return (
     <>

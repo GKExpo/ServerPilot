@@ -1,6 +1,6 @@
 {
-  "appId": "com.serverpilot.desktop",
-  "productName": "ServerPilot",
+  "appId": "com.serverpilotv2.desktop",
+  "productName": "ServerPilot V2",
   "asar": true,
   "directories": {
     "output": "dist"
@@ -28,7 +28,8 @@
         "arch": ["x64"]
       }
     ],
-    "artifactName": "ServerPilot-${version}-${arch}-${name}.${ext}"
+    "artifactName": "ServerPilotV2-${version}-${arch}-${name}.${ext}",
+    "requestedExecutionLevel": "asInvoker"
   },
   "nsis": {
     "oneClick": false,
@@ -36,10 +37,10 @@
     "allowToChangeInstallationDirectory": true,
     "createDesktopShortcut": true,
     "createStartMenuShortcut": true,
-    "shortcutName": "ServerPilot",
-    "artifactName": "ServerPilot-Setup-${version}.${ext}"
+    "shortcutName": "ServerPilot V2",
+    "artifactName": "ServerPilotV2-Setup-${version}.${ext}"
   },
   "portable": {
-    "artifactName": "ServerPilot-Portable-${version}.${ext}"
+    "artifactName": "ServerPilotV2-Portable-${version}.${ext}"
   }
 }

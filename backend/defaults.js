@@ -5,7 +5,8 @@ const defaultSettings = {
   playitPath: '',
   autoStartPlayit: true,
   autoRestartCrashed: false,
-  theme: 'neon'
+  theme: 'neon',
+  hasCompletedOnboarding: false
 };
 
 const defaultServer = {

@@ -28,7 +28,7 @@
         "arch": ["x64"]
       }
     ],
-    "artifactName": "ServerPilotV2-${version}-${arch}-${name}.${ext}",
+    "artifactName": "ServerPilot v${version}-${arch}-${name}.${ext}",
     "requestedExecutionLevel": "asInvoker"
   },
   "nsis": {
@@ -38,9 +38,9 @@
     "createDesktopShortcut": true,
     "createStartMenuShortcut": true,
     "shortcutName": "ServerPilot V2",
-    "artifactName": "ServerPilotV2-Setup-${version}.${ext}"
+    "artifactName": "ServerPilot v${version}-Setup.${ext}"
   },
   "portable": {
-    "artifactName": "ServerPilotV2-Portable-${version}.${ext}"
+    "artifactName": "ServerPilot v${version}-Portable.${ext}"
   }
 }

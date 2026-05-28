@@ -21,7 +21,7 @@ function normalizeServer(input, settings) {
 
 function createStorageHandlers({ ipcMain, app }) {
   const store = new Store({
-    name: 'serverpilot',
+    name: 'serverpilot-v2',
     defaults: { servers: [], settings: defaultSettings }
   });
 
@@ -60,7 +60,7 @@ function createStorageHandlers({ ipcMain, app }) {
       return next;
     },
     exportDataPath() {
-      return path.join(app.getPath('userData'), 'serverpilot.json');
+      return path.join(app.getPath('userData'), 'serverpilot-v2.json');
     }
   };
 

@@ -3,10 +3,19 @@ const path = require('path');
 
 const textExtensions = new Set(['.yml', '.yaml', '.json', '.txt', '.properties', '.log', '.md', '.cfg', '.conf', '.toml']);
 
+const protectedRoots = ['C:\\Windows', 'C:\\Program Files', 'C:\\Program Files (x86)', 'C:\\Users\\Default'];
+
 function resolveInside(root, relativePath = '') {
   const base = path.resolve(root);
   const target = path.resolve(base, relativePath || '.');
   if (target !== base && !target.startsWith(base + path.sep)) throw new Error('Path escapes the server folder');
+  
+  const lowerTarget = target.toLowerCase();
+  for (const protectedRoot of protectedRoots) {
+    if (lowerTarget.startsWith(protectedRoot.toLowerCase())) {
+      throw new Error('Access to protected system directories is strictly prohibited.');
+    }
+  }
   return target;
 }
 
@@ -60,7 +69,11 @@ function createFileHandlers({ ipcMain, storeApi }) {
   ipcMain.handle('files:write', async (_event, { id, relativePath, content }) => {
     const root = getServerRoot(storeApi, id);
     const file = resolveInside(root, relativePath);
-    await fs.promises.writeFile(file, String(content ?? ''), 'utf8');
+    const data = String(content ?? '');
+    if (Buffer.byteLength(data, 'utf8') > 1024 * 1024 * 4) {
+      throw new Error('Payload exceeds the 4MB safety limit for IPC writes.');
+    }
+    await fs.promises.writeFile(file, data, 'utf8');
     return true;
   });
 

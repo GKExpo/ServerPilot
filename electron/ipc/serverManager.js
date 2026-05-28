@@ -433,7 +433,8 @@ function createServerHandlers({ ipcMain, app, shell, send, notify, storeApi }) {
   ipcMain.handle('server:open-terminal', (_event, id) => {
     const server = storeApi.getServer(id);
     if (!server?.folderPath || !fs.existsSync(server.folderPath)) throw new Error('Missing server folder');
-    spawn('cmd.exe', ['/c', 'start', 'cmd.exe', '/K', `cd /d "${server.folderPath}"`], { windowsHide: true });
+    const safePath = server.folderPath.replace(/"/g, '');
+    spawn('cmd.exe', ['/c', 'start', 'cmd.exe', '/K', `cd /d "${safePath}"`], { windowsHide: true });
     return true;
   });
 

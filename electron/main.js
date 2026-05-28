@@ -5,6 +5,8 @@ const { createServerHandlers } = require('./ipc/serverManager');
 const { createFileHandlers } = require('./ipc/fileManager');
 const { createBackupHandlers } = require('./ipc/backupManager');
 
+app.setPath('userData', path.join(app.getPath('appData'), 'serverpilot-v2'));
+
 let mainWindow;
 
 function send(channel, payload) {
@@ -23,12 +25,15 @@ function createWindow() {
     minWidth: 1040,
     minHeight: 680,
     backgroundColor: '#070a0f',
-    title: 'ServerPilot',
+    title: 'ServerPilot V2',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false,
-      sandbox: false
+      sandbox: true,
+      webSecurity: true,
+      allowRunningInsecureContent: false,
+      webviewTag: false
     }
   });
 
@@ -49,6 +54,15 @@ app.whenReady().then(() => {
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
+
+  app.on('web-contents-created', (event, contents) => {
+    contents.on('will-attach-webview', (e) => {
+      e.preventDefault();
+    });
+    contents.setWindowOpenHandler(() => {
+      return { action: 'deny' };
+    });
   });
 });
 
